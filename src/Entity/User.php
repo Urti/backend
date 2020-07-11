@@ -114,7 +114,7 @@ class User
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getCreated_At()
     {
@@ -122,7 +122,7 @@ class User
     }
 
     /**
-     * @param array $created_at
+     * @param string $created_at
      */
     public function setCreated_At(DateTime $created_at)
     {
