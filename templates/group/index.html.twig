@@ -15,23 +15,19 @@ table, th, td {
 <div class="example-wrapper">
     <table>
         <tr>
-            <td>Login</td>
-            <td>Nazwisko</td>
-            <td>Imię</td>
+            <td>Nazwa</td>
+            <td>Informacja</td>
             <td>Utworzono</td>
             <td>Zmodyfikowano</td>
-            <td>Grupa</td>
             <td>Edytuj/Usuń</td>
         </tr>
-        {% for user in users %}
+        {% for group in groups %}
             <tr>
-                <td>{{ user.login }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.createdat|date("m-d-Y H:i:s", false) }}</td>
-                <td>{{ user.updatedat|date("m-d-Y H:i:s", false) }}</td>
-                <td>{{ user.group }}</td>
-                <td><a href="{{ path('app_user_edit', {'id':user.id}) }}">Edytuj</a> | <a href="{{ path('app_user_delete', {'id':user.id}) }}">Usuń</a></td>
+                <td>{{ group.name }}</td>
+                <td>{{ group.info }}</td>
+                <td>{{ group.createdat|date("m-d-Y H:i:s", false) }}</td>
+                <td>{{ group.updatedat|date("m-d-Y H:i:s", false) }}</td>
+                <td><a href="{{ path('app_group_edit', {'id':group.id}) }}">Edytuj</a> | <a href="{{ path('app_group_delete', {'id':group.id}) }}">Usuń</a></td>
             </tr>
         {% else %}
             <tr>Lista jest pusta</tr>
