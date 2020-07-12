@@ -38,6 +38,6 @@ class UserType extends AbstractType
                 'choice_label' => 'name',
                 'label' => 'Grupa: '
             ])
-            ->add('save', SubmitType::class, ['label' => 'Edytuj', 'attr' => array('class' => 'btn btn-success')]);
+            ->add('save', SubmitType::class, ['label' => 'Zapisz', 'attr' => array('class' => 'btn btn-success')]);
     }
 }

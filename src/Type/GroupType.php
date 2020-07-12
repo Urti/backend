@@ -29,6 +29,6 @@ class GroupType extends AbstractType
                 'attr' => array('style' => 'display:none;'),
                 'label' => ' '
             ])
-            ->add('save', SubmitType::class, ['label' => 'Dodaj', 'attr' => array('class' => 'btn btn-success')]);
+            ->add('save', SubmitType::class, ['label' => 'Zapisz', 'attr' => array('class' => 'btn btn-success')]);
     }
 }
