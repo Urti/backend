@@ -47,6 +47,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
+            $this->addFlash('success', 'Osoba o imieniu ' . $user->getFirstName() . ' została pomyśłnie dodana');
             return $this->redirectToRoute('index');
         }
 
@@ -67,6 +68,7 @@ class UserController extends AbstractController
         $user = $repository->find($id);
         $entityManagerInterface->remove($user);
         $entityManagerInterface->flush();
+        $this->addFlash('danger', 'Osoba o imieniu ' . $user->getFirstName() . ' została usunięta');
 
         return $this->redirectToRoute('index');
     }
@@ -85,6 +87,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
+            $this->addFlash('info', 'Osoba o imieniu ' . $user->getFirstName() . ' została z edytowana.');
             return $this->redirectToRoute('index');
         }
 

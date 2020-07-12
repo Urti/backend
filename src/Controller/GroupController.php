@@ -47,6 +47,7 @@ class GroupController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManagerInterface->persist($group);
             $entityManagerInterface->flush();
+            $this->addFlash('success', 'Grupa o nazwie ' . $group->getName() . ' została pomyśłnie dodana');
             return $this->redirectToRoute('group');
         }
 
@@ -67,6 +68,7 @@ class GroupController extends AbstractController
         $group = $repository->find($id);
         $entityManagerInterface->remove($group);
         $entityManagerInterface->flush();
+        $this->addFlash('danger', 'Grupa o nazwie ' . $group->getName() . ' została usunięta');
 
         return $this->redirectToRoute('group');
     }
@@ -85,6 +87,7 @@ class GroupController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManagerInterface->persist($group);
             $entityManagerInterface->flush();
+            $this->addFlash('info', 'Grupa o nazwie ' . $group->getName() . ' została pomyśłnie z edytowana');
             return $this->redirectToRoute('group');
         }
 
