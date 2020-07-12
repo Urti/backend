@@ -12,8 +12,20 @@ class GroupType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $check_builder = $builder->getData()->getcreatedat();
+        $builder
+            ->add('name', TextType::class, ['label' => 'Nazwa'])
+            ->add('info', TextType::class, [
+                'label' => 'Informacja',
+                'required' => false
+            ])
+            ->add('save', SubmitType::class, ['label' => 'Zapisz', 'attr' => array('class' => 'btn btn-success btn-sm btn-block mt-3')])
+            ->add('updatedat', ChoiceType::class, [
+                'choices' => ['now' => new \DateTime('now'),],
+                'attr' => array('style' => 'display:none;'),
+                'label' => ' '
+            ]);
 
+        $check_builder = $builder->getData()->getcreatedat();
         if (is_null($check_builder)) {
             $checkin =  $builder->add('createdat', ChoiceType::class, [
                 'choices' => ['now' => new \DateTime('now'),],
@@ -21,16 +33,5 @@ class GroupType extends AbstractType
                 'label' => ' '
             ]);
         }
-        $builder
-            ->add('name', TextType::class)
-            ->add('info', TextType::class, [
-                'required' => false
-            ])
-            ->add('updatedat', ChoiceType::class, [
-                'choices' => ['now' => new \DateTime('now'),],
-                'attr' => array('style' => 'display:none;'),
-                'label' => ' '
-            ])
-            ->add('save', SubmitType::class, ['label' => 'Zapisz', 'attr' => array('class' => 'btn btn-success')]);
     }
 }

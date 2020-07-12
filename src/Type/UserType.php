@@ -14,6 +14,23 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder
+            ->add('login', TextType::class)
+            ->add('last_name', TextType::class, ['label' => 'Nazwisko'])
+            ->add('first_name', TextType::class, ['label' => 'Imię'])
+            ->add('group', EntityType::class, [
+                'required' => false,
+                'placeholder' => 'Wybierz Grupę',
+                'class' => Group::class,
+                'choice_label' => 'name',
+                'label' => 'Grupa: '
+            ])
+            ->add('save', SubmitType::class, ['label' => 'Zapisz', 'attr' => array('class' => 'btn btn-success btn-sm btn-block')])
+            ->add('updatedat', ChoiceType::class, [
+                'choices' => ['now' => new \DateTime('now'),],
+                'attr' => array('style' => 'display:none;'),
+                'label' => ' '
+            ]);
         $check_builder = $builder->getData()->getcreatedat();
         if (is_null($check_builder)) {
             $checkin =  $builder->add('createdat', ChoiceType::class, [
@@ -22,22 +39,5 @@ class UserType extends AbstractType
                 'label' => ' '
             ]);
         }
-        $builder
-            ->add('login', TextType::class)
-            ->add('last_name', TextType::class)
-            ->add('first_name', TextType::class)
-            ->add('updatedat', ChoiceType::class, [
-                'choices' => ['now' => new \DateTime('now'),],
-                'attr' => array('style' => 'display:none;'),
-                'label' => ' '
-            ])
-            ->add('group', EntityType::class, [
-                'required' => false,
-                'placeholder' => 'Wybierz Grupę',
-                'class' => Group::class,
-                'choice_label' => 'name',
-                'label' => 'Grupa: '
-            ])
-            ->add('save', SubmitType::class, ['label' => 'Zapisz', 'attr' => array('class' => 'btn btn-success')]);
     }
 }

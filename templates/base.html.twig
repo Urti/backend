@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
         <title>{% block title %}Lista użytkowników{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <style>
@@ -35,15 +37,18 @@
         </style>
     </head>
     <header>
-    <div class="topnav">
-        <a class="active" href="{{ path('index') }}">Lista Osób</a>
-        <a href="{{ path('group') }}">Lista Grup</a>
-        <a href="{{ path('app_user_create') }}">Dodaj Osobę</a>
-        <a href="{{ path('app_group_create') }}">Dodaj Grupę</a>
-    </div>
+        <div class="topnav nav justify-content-center">
+            <a {% if app.request.get('_route') == 'index' %} class="active"{% endif %} href="{{ path('index') }}">Lista Osób</a>
+            <a {% if app.request.get('_route') == 'group' %} class="active"{% endif %} href="{{ path('group') }}">Lista Grup</a>
+            <a {% if app.request.get('_route') == 'app_user_create' %} class="active"{% endif %} href="{{ path('app_user_create') }}">Dodaj Osobę</a>
+            <a {% if app.request.get('_route') == 'app_group_create' %} class="active"{% endif %} href="{{ path('app_group_create') }}">Dodaj Grupę</a>
+        </div>
     </header>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container mt-5">
+            {% block body %}{% endblock %}
+        </div>
+        
         {% block javascripts %}{% endblock %}
     </body>
 </html>

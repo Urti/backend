@@ -1,37 +1,38 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    table {
-  border-collapse: collapse;
-}
-
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-
-<div class="example-wrapper">
-    <table>
-        <tr>
-            <td>Nazwa</td>
-            <td>Informacja</td>
-            <td>Utworzono</td>
-            <td>Zmodyfikowano</td>
-            <td>Edytuj/Usuń</td>
-        </tr>
-        {% for group in groups %}
-            <tr>
-                <td>{{ group.name }}</td>
-                <td>{{ group.info }}</td>
-                <td>{{ group.createdat|date("m-d-Y H:i:s", false) }}</td>
-                <td>{{ group.updatedat|date("m-d-Y H:i:s", false) }}</td>
-                <td><a href="{{ path('app_group_edit', {'id':group.id}) }}">Edytuj</a> | <a href="{{ path('app_group_delete', {'id':group.id}) }}">Usuń</a></td>
-            </tr>
+<div class="row">
+    <div class="col-12">
+        {%if groups %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Informacja</th>
+                    <th scope="col">Utworzono</th>
+                    <th scope="col">Zmodyfikowano</th>
+                    <th scope="col">Edytuj/Usuń</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for group in groups %}
+                    <tr>
+                        <td>{{ group.name }}</td>
+                        <td>{{ group.info }}</td>
+                        <td>{{ group.createdat|date("m-d-Y H:i:s", false) }}</td>
+                        <td>{{ group.updatedat|date("m-d-Y H:i:s", false) }}</td>
+                        <td>
+                            <a href="{{ path('app_group_edit', {'id':group.id}) }}" type="button" class="btn btn-outline-warning btn-sm">Edytuj</a>
+                            <a href="{{ path('app_group_delete', {'id':group.id}) }}" type="button" class="btn btn-outline-danger btn-sm">Usuń</a>
+                        </td>
+                    </tr>
+                {% endfor %}          
+                </tbody>
+            </table>
         {% else %}
-            <tr>Lista jest pusta</tr>
-        {% endfor %}
-    </table>
+            <div class="alert alert-info text-center" role="alert">
+                Lista jest pusta! <a href="{{ path('app_group_create') }}" type="button" class="btn btn-outline-success btn-sm">Dodaj</a> grupę.
+            </div>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

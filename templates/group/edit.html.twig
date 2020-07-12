@@ -2,17 +2,10 @@
 {% block body %}
     <h1>Edytuj Grupę</h1>
     {{ form_start(form) }}
-    <div class="form-control">
-        Nazwa:
+        {{ form_label(form.name) }}
         {{ form_widget(form.name) }}
-        <div class="form-error">
-            <b>{{ form_errors(form.name) }}</b>
-        </div>
-        Informacja:
+
+        {{ form_label(form.info) }}
         {{ form_widget(form.info) }}
-        <div class="form-error">
-            <b>{{ form_errors(form.info) }}</b>
-        </div>        
-    </div>
     {{ form_end(form) }}
 {% endblock %}

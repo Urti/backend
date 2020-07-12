@@ -1,41 +1,43 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    table {
-  border-collapse: collapse;
-}
-
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-
-<div class="example-wrapper">
-    <table>
-        <tr>
-            <td>Login</td>
-            <td>Nazwisko</td>
-            <td>Imię</td>
-            <td>Utworzono</td>
-            <td>Zmodyfikowano</td>
-            <td>Grupa</td>
-            <td>Edytuj/Usuń</td>
-        </tr>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.login }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.createdat|date("m-d-Y H:i:s", false) }}</td>
-                <td>{{ user.updatedat|date("m-d-Y H:i:s", false) }}</td>
-                <td>{{ user.group }}</td>
-                <td><a href="{{ path('app_user_edit', {'id':user.id}) }}">Edytuj</a> | <a href="{{ path('app_user_delete', {'id':user.id}) }}">Usuń</a></td>
-            </tr>
+<div class="row">
+    <div class="col-12">
+        {%if users %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">Login</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Imię</th>
+                    <th scope="col">Utworzono</th>
+                    <th scope="col">Zmodyfikowano</th>
+                    <th scope="col">Grupa</th>
+                    <th scope="col">Edytuj/Usuń</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.login }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.createdat|date("m-d-Y H:i:s", false) }}</td>
+                        <td>{{ user.updatedat|date("m-d-Y H:i:s", false) }}</td>
+                        <td>{{ user.group }}</td>
+                        <td>
+                            <a href="{{ path('app_user_edit', {'id':user.id}) }}" type="button" class="btn btn-outline-warning btn-sm">Edytuj</a>
+                            <a href="{{ path('app_user_delete', {'id':user.id}) }}" type="button" class="btn btn-outline-danger btn-sm">Usuń</a>
+                        </td>
+                    </tr>       
+                {% endfor %}          
+                </tbody>
+            </table>
         {% else %}
-            <tr>Lista jest pusta</tr>
-        {% endfor %}
-    </table>
+            <div class="alert alert-info text-center" role="alert">
+                Lista jest pusta! <a href="{{ path('app_user_create') }}" type="button" class="btn btn-outline-success btn-sm">Dodaj</a> osobę.
+            </div>
+        {% endif %}
+    </div>
 </div>
+
 {% endblock %}
