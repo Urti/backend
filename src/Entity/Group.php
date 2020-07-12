@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use DateTime;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Group
@@ -25,6 +25,8 @@ class Group
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Nazwa nie może być pusta")
+     * @Assert\Length(max="255", maxMessage="Nazwa nie może mieć więcej niż 255 znaków")
      * @var string
      */
     private $name;
@@ -77,7 +79,7 @@ class Group
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -93,7 +95,7 @@ class Group
     /**
      * @param string $info
      */
-    public function setInfo(string $info): void
+    public function setInfo(?string $info): void
     {
         $this->info = $info;
     }

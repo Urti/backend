@@ -22,8 +22,10 @@ class GroupType extends AbstractType
             ]);
         }
         $builder
-            ->add('name', TextType::class, ['label' => 'Nazwa: '])
-            ->add('info', TextType::class, ['label' => 'Informacja: '])
+            ->add('name', TextType::class)
+            ->add('info', TextType::class, [
+                'required' => false
+            ])
             ->add('updatedat', ChoiceType::class, [
                 'choices' => ['now' => new \DateTime('now'),],
                 'attr' => array('style' => 'display:none;'),
