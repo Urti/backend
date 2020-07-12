@@ -83,7 +83,7 @@ class User
     /**
      * @param string $login
      */
-    public function setLogin(string $login): void
+    public function setLogin(?string $login): void
     {
         $this->login = $login;
     }
@@ -93,7 +93,7 @@ class User
         return $this->last_name;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(?string $last_name): self
     {
         $this->last_name = $last_name;
 
@@ -105,7 +105,7 @@ class User
         return $this->first_name;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setFirstName(?string $first_name): self
     {
         $this->first_name = $first_name;
 
