@@ -24,13 +24,15 @@ class User
     private $id;
 
     /**
-     * @Assert\Length(max="100", min="2", minMessage="Login musi mieć minimum 2 znaki", maxMessage="Login nie może mieć więcej niż 100 znaków")
+     * @Assert\Length(max="100", maxMessage="Login nie może mieć więcej niż 100 znaków")
+     * @Assert\NotBlank(message="Login nie może być pusty")
      * @ORM\Column(type="string", length=100, options={"unique"=true})
      * @var string
      */
     private $login;
 
     /**
+     * @Assert\Length(max="255", maxMessage="Nazwisko nie może mieć więcej niż 255 znaków")
      * @Assert\NotBlank(message="Nazwisko nie może być puste")
      * @ORM\Column(type="string")
      * @var string
@@ -38,6 +40,7 @@ class User
     private $last_name;
 
     /**
+     * @Assert\Length(max="255", maxMessage="Imię nie może mieć więcej niż 255 znaków")
      * @Assert\NotBlank(message="Imię nie może być puste")
      * @ORM\Column(type="string")
      * @var string
