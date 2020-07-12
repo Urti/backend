@@ -24,8 +24,8 @@ class UserType extends AbstractType
         }
         $builder
             ->add('login', TextType::class, ['label' => 'Login: '])
-            ->add('lastname', TextType::class, ['label' => 'Nazwisko: '])
-            ->add('firstname', TextType::class, ['label' => 'Imię: '])
+            ->add('last_name', TextType::class, ['label' => 'Nazwisko: '])
+            ->add('first_name', TextType::class, ['label' => 'Imię: '])
             ->add('updatedat', ChoiceType::class, [
                 'choices' => ['now' => new \DateTime('now'),],
                 'attr' => array('style' => 'display:none;'),

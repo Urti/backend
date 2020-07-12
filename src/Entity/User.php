@@ -2,15 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Class User
  * @package App\Entity
  * @ORM\Entity()
  * @ORM\Table(name="`person`")
+ * @UniqueEntity("login", message="Już taki login istnieje!")
  */
 class User
 {
@@ -22,18 +24,21 @@ class User
     private $id;
 
     /**
+     * @Assert\Length(max="100", min="2", minMessage="Login musi mieć minimum 2 znaki", maxMessage="Login nie może mieć więcej niż 100 znaków")
      * @ORM\Column(type="string", length=100, options={"unique"=true})
      * @var string
      */
     private $login;
 
     /**
+     * @Assert\NotBlank(message="Nazwisko nie może być puste")
      * @ORM\Column(type="string")
      * @var string
      */
     private $last_name;
 
     /**
+     * @Assert\NotBlank(message="Imię nie może być puste")
      * @ORM\Column(type="string")
      * @var string
      */

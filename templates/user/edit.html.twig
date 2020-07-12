@@ -1,5 +1,23 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h1>Edytuj osobę</h1>
-    {{ form(form) }}
+    {{ form_start(form) }}
+    <div class="form-control">
+        Login:
+        {{ form_widget(form.login) }}
+        <div class="form-error">
+            <b>{{ form_errors(form.login) }}</b>
+        </div>
+        Nazwisko:
+        {{ form_widget(form.last_name) }}
+        <div class="form-error">
+            <b>{{ form_errors(form.last_name) }}</b>
+        </div>
+        Imię:
+        {{ form_widget(form.first_name) }}
+        <div class="form-error">
+            <b>{{ form_errors(form.first_name) }}</b>
+        </div>
+    </div<
+    {{ form_end(form) }}
 {% endblock %}
