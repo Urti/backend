@@ -16,6 +16,12 @@ composer require symfony/maker-bundle --dev
 composer require annotations
 ```
 
+### Validator
+
+```
+composer require symfony/validator
+```
+
 ### Profiler
 
 ```
