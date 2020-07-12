@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Type\UserType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,24 +41,17 @@ class UserController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $entityManagerInterface): Response
     {
-        if ('POST' == $request->getMethod()) {
-            $created_at = new DateTime('now');
-            $user = new User();
-            $user->setLogin($request->get('login'));
-            $user->setLast_Name($request->get('last_name'));
-            $user->setFirst_Name($request->get('first_name'));
-            $user->setCreated_At($created_at);
-            $user->setUpdated_At($created_at);
-
+        $user = new User('');
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
-
             return $this->redirectToRoute('index');
-        } else {
-            $user = new User('');
         }
+
         return $this->render('user/create.html.twig', [
-            'user' => $user,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -86,20 +80,16 @@ class UserController extends AbstractController
      */
     public function edit(User $user, EntityManagerInterface $entityManagerInterface, Request $request): Response
     {
-        if ('POST' == $request->getMethod()) {
-            $updated_at = new DateTime('now');
-            $user->setLogin($request->get('login'));
-            $user->setLast_Name($request->get('last_name'));
-            $user->setFirst_Name($request->get('first_name'));
-            $user->setUpdated_At($updated_at);
-            //Save the edited values to DB:
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManagerInterface->persist($user);
             $entityManagerInterface->flush();
-
             return $this->redirectToRoute('index');
         }
 
         return $this->render('user/edit.html.twig', [
-            'user' => $user,
+            'form' => $form->createView(),
         ]);
     }
 }

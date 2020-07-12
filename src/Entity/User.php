@@ -52,8 +52,7 @@ class User
     private $updated_at;
 
     /**     
-     * @ORM\ManyToOne(targetEntity="App\Entity\Group")
-     * @var Group|null
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="user")
      */
     private $group;
 
@@ -68,7 +67,7 @@ class User
     /**
      * @return string
      */
-    public function getLogin(): string
+    public function getLogin(): ?string
     {
         return $this->login;
     }
@@ -81,83 +80,63 @@ class User
         $this->login = $login;
     }
 
-    /**
-     * @return string
-     */
-    public function getLast_Name(): string
+    public function getLastName(): ?string
     {
         return $this->last_name;
     }
 
-    /**
-     * @param string $last_name
-     */
-    public function setLast_Name(string $last_name): void
+    public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFirst_Name(): string
+    public function getFirstName(): ?string
     {
         return $this->first_name;
     }
 
-    /**
-     * @param string $first_name
-     */
-    public function setFirst_Name(string $first_name): void
+    public function setFirstName(string $first_name): self
     {
         $this->first_name = $first_name;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCreated_At()
+    public function getCreatedAt()
     {
         return $this->created_at;
     }
 
-    /**
-     * @param string $created_at
-     */
-    public function setCreated_At(DateTime $created_at)
+    public function setCreatedAt(DateTime $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getUpdated_At()
+    public function getUpdatedAt()
     {
         return $this->updated_at;
     }
 
-    /**
-     * @param string $updated_at
-     */
-    public function setUpdated_At(DateTime $updated_at)
+    public function setUpdatedAt(DateTime $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
     }
 
-    /**
-     * @return int:null
-     */
-    public function getGroup_id(): ?int
+    public function getGroup(): ?Group
     {
         return $this->group;
     }
 
-    /**
-     * @param int:null $group
-     */
-    public function setGroup_id(string $group): void
+    public function setGroup(?Group $group): self
     {
         $this->group = $group;
+
+        return $this;
     }
 }
