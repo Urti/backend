@@ -50,13 +50,15 @@ class Group
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="group") 
+     * @var User[]|Collection
      */
-    private $user;
+    private $users;
 
-    public function __construct()
+    public function __construct(string $name)
     {
-        $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->name = $name;
     }
 
 
@@ -127,33 +129,38 @@ class Group
     /**
      * @return Collection|User[]
      */
-    public function getUser(): Collection
+    public function getUser()
     {
-        return $this->user;
+        return $this->users;
     }
 
-    public function addUser(User $user): self
+    public function addUser(User $user)
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-            $user->setGroup($this);
-        }
-
-        return $this;
+        $user->setGroup($this);
+        $this->users->add($user);
     }
+    // public function addUser(User $user): self
+    // {
+    //     if (!$this->user->contains($user)) {
+    //         $this->user[] = $user;
+    //         $user->setGroup($this);
+    //     }
 
-    public function removeUser(User $user): self
-    {
-        if ($this->user->contains($user)) {
-            $this->user->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getGroup() === $this) {
-                $user->setGroup(null);
-            }
-        }
+    //     return $this;
+    // }
 
-        return $this;
-    }
+    // public function removeUser(User $user): self
+    // {
+    //     if ($this->user->contains($user)) {
+    //         $this->user->removeElement($user);
+    //         // set the owning side to null (unless already changed)
+    //         if ($user->getGroup() === $this) {
+    //             $user->setGroup(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
     public function __toString()
     {
         return (string) $this->getName();

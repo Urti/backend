@@ -60,9 +60,16 @@ class User
     private $updated_at;
 
     /**     
-     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="user")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="users")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     * @var Group|null
      */
     private $group;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
 
     /**
      * @return int
@@ -136,15 +143,19 @@ class User
         return $this;
     }
 
+    /**
+     * @return Group
+     */
     public function getGroup(): ?Group
     {
         return $this->group;
     }
 
-    public function setGroup(?Group $group): self
+    /**
+     * @param Group $group
+     */
+    public function setGroup(?Group $group): void
     {
         $this->group = $group;
-
-        return $this;
     }
 }
